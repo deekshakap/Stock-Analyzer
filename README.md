@@ -1,4 +1,4 @@
-# Wall Street Portfolio Tracker
+# Portfolio Tracker
 
 ## 📈 Project Overview
 This Java application tracks a simulated stock portfolio and provides rebalancing recommendations based on target allocations.  
