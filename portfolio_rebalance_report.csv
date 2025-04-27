@@ -1,0 +1,7 @@
+Ticker,Company Name,Amount Owned,Current %,Target %,Suggestion
+MSFT,Microsoft Corp.,3500.00,20.00,20.00,Sell $-0.00
+GOOGL,Alphabet Inc.,3000.00,17.14,20.00,Buy $500.00
+NVDA,NVIDIA Corporation,1500.00,8.57,10.00,Buy $250.00
+AAPL,Apple Inc.,5000.00,28.57,25.00,Sell $625.00
+TSLA,Tesla Inc.,2000.00,11.43,10.00,Sell $250.00
+AMZN,Amazon.com Inc.,2500.00,14.29,15.00,Buy $125.00
