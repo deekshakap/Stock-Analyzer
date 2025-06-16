@@ -1,0 +1,40 @@
+from flask import Flask, jsonify
+import sqlite3
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app)  # Allow frontend to access API from a different origin (optional but useful)
+
+DB_PATH = 'db/portfolio.db'  # Adjust path if needed
+
+@app.route('/api/portfolio', methods=['GET'])
+def get_portfolio():
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+        cursor.execute('''
+            SELECT ticker, company_name, amount_owned, current_percent, target_percent, suggestion
+            FROM portfolio
+        ''')
+        rows = cursor.fetchall()
+        conn.close()
+
+        # Format results into JSON
+        portfolio_data = [
+            {
+                'ticker': row[0],
+                'companyName': row[1],
+                'amountOwned': row[2],
+                'currentPercent': row[3],
+                'targetPercent': row[4],
+                'suggestion': row[5],
+            }
+            for row in rows
+        ]
+
+        return jsonify(portfolio_data)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+if __name__ == '__main__':
+    app.run(debug=True, port=5000)
