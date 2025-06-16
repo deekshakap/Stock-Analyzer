@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stock Portfolio Rebalance Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+    }
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .header-title {
+      width: 100%;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    #search {
+      margin-left: auto;
+      padding: 8px;
+      font-size: 14px;
+      width: 200px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: #f0f0f0;
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid #999;
+      text-align: center;
+    }
+    th {
+      background-color: #2e2e2e;
+      color: #fff;
+    }
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    .buy {
+      color: green;
+    }
+    .sell {
+      color: red;
+    }
+    .error {
+      color: red;
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header-container">
+    <div class="header-title">Stock Portfolio Rebalance Dashboard</div>
+    <input type="text" id="search" placeholder="Search Ticker (e.g. AAPL)" oninput="filterTable()">
+  </div>
+
+  <div id="error-message" class="error"></div>
+  <table id="portfolio-table">
+    <thead>
+      <tr>
+        <th>Ticker</th>
+        <th>Company Name</th>
+        <th>Amount Owned</th>
+        <th>Current %</th>
+        <th>Target %</th>
+        <th>Suggestion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Data populated by JS -->
+    </tbody>
+  </table>
+
+  <script>
+    let portfolioData = [];
+
+    async function loadPortfolioData() {
+      const errorDiv = document.getElementById('error-message');
+      try {
+        const res = await fetch('/api/portfolio');
+        if (!res.ok) throw new Error(`Server responded with status ${res.status}`);
+
+        const data = await res.json();
+        if (!Array.isArray(data)) throw new Error('Invalid data format received. Expected an array.');
+
+        portfolioData = data;
+        renderTable(data);
+      } catch (error) {
+        console.error('Failed to load portfolio data:', error);
+        errorDiv.textContent = 'Failed to load portfolio data. Ensure the backend API at /api/portfolio is available.';
+      }
+    }
+
+    function renderTable(data) {
+      const tableBody = document.querySelector('#portfolio-table tbody');
+      tableBody.innerHTML = '';
+
+      data.forEach(stock => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${stock.ticker}</td>
+          <td>${stock.companyName}</td>
+          <td>$${Number(stock.amountOwned).toFixed(2)}</td>
+          <td>${Number(stock.currentPercent).toFixed(2)}%</td>
+          <td>${Number(stock.targetPercent).toFixed(2)}%</td>
+          <td class="${String(stock.suggestion).includes('Buy') ? 'buy' : 'sell'}">${stock.suggestion}</td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    function filterTable() {
+      const query = document.getElementById('search').value.toUpperCase();
+      const filtered = portfolioData.filter(stock => stock.ticker.toUpperCase().includes(query));
+      renderTable(filtered);
+    }
+
+    loadPortfolioData();
+  </script>
+</body>
+</html>
