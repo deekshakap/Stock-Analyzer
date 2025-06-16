@@ -109,18 +109,4 @@ Compile and run the Java project to:
 * **HTML/CSS**: Responsive frontend
 * **SQLite**: Portfolio database
 
----
 
-## 🔍 Optional Enhancements
-
-* Use Chart.js for visual portfolio weight
-* Add login support
-* Track investment history over time
-* Allow editing of allocations via UI
-* Integrate with external APIs for predictions
-
----
-
-## 📬 Contact
-
-Made with 💡 by \[Your Name] · MIT License
