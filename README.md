@@ -16,7 +16,7 @@ It combines:
 
 ---
 
-## 💻 Features
+## Features
 
 * Track popular Wall Street-tracked stocks (AAPL, GOOGL, TSLA, AMZN, MSFT, NVDA, etc.)
 * Set custom target asset allocations
