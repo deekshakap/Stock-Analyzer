@@ -1,10 +1,10 @@
-# 📊 Stock Portfolio Rebalance Tool
+# Stock Portfolio Rebalance Tool
 
 A full-stack web application that allows users to track, filter, and receive investment suggestions for stocks based on real-time data pulled from Nasdaq.
 
 ---
 
-## 📈 Project Overview
+## Project Overview
 
 This Java + Python-based project tracks a simulated stock portfolio and provides rebalancing recommendations based on target allocations.
 It combines:
@@ -29,42 +29,22 @@ It combines:
 
 ---
 
-## 🗂️ Project Structure
+## Setup Instructions
 
-```
-your-project/
-├── db/
-│   └── portfolio.db             # SQLite database (auto-generated)
-├── scripts/
-│   └── populate_portfolio.py   # Pulls real Nasdaq data and populates DB
-├── frontend/
-│   └── index.html              # Frontend UI
-├── backend/
-│   └── backend_api.py          # Flask API to serve data
-├── java/
-│   ├── MainApp.java            # Java core logic
-│   └── tracker/                # Java classes and interfaces
-├── README.md
-```
-
----
-
-## ⚙️ Setup Instructions
-
-### 1. 🔁 Clone the Repository
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/your-username/your-project.git
 cd your-project
 ```
 
-### 2. 🐍 Install Python Dependencies
+### 2. Install Python Dependencies
 
 ```bash
 pip install flask flask-cors pandas requests yfinance
 ```
 
-### 3. 🗃️ Generate the SQLite Database with Nasdaq Data
+### 3. Generate the SQLite Database with Nasdaq Data
 
 ```bash
 python scripts/populate_portfolio.py
@@ -77,7 +57,7 @@ This will:
 * Assign dummy values
 * Save into `db/portfolio.db`
 
-### 4. 🔌 Start the Backend API
+### 4. Start the Backend API
 
 ```bash
 python backend/backend_api.py
@@ -85,13 +65,13 @@ python backend/backend_api.py
 
 Open: [http://localhost:5000/api/portfolio](http://localhost:5000/api/portfolio)
 
-### 5. 🌐 Launch the Frontend
+### 5. Launch the Frontend
 
 Simply open the `frontend/index.html` file in your browser.
 
 > Make sure the backend is running so the table can fetch data from `/api/portfolio`.
 
-### 6. ⚙️ Run Java Rebalance Logic (optional)
+### 6. Run Java Rebalance Logic (optional)
 
 Compile and run the Java project to:
 
@@ -101,7 +81,7 @@ Compile and run the Java project to:
 
 ---
 
-## 🧠 Technologies Used
+## Technologies Used
 
 * **Java**: Core logic, data structures (HashMap, TreeMap, List), File I/O, CSV export
 * **Python**: Flask API, Nasdaq data ingestion, SQLite insertion
